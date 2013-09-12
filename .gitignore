@@ -1,8 +1,12 @@
+*.log
+*.pot
+*.pyc
+local_settings.py
+
+
 datos
 datos/
 *.swp
-*.pyc
 venv
-
-
 commands.txt
+
