@@ -11,12 +11,16 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'ddjj',                      # Or path to database file if using sqlite3.
+        # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # Or path to database file if using sqlite3.
+        'NAME': 'ddjj',
         # The following settings are not used with sqlite3:
         'USER': 'postgres',
         #'PASSWORD': '',
-        'HOST': 'localhost',                      # Empty for localhost through domain sockets or '127.0.0.1' for localhost through TCP.
+        # Empty for localhost through domain sockets or '127.0.0.1' for
+        # localhost through TCP.
+        'HOST': 'localhost',
         'PORT': '5432',                      # Set to empty string for default.
     }
 }
@@ -79,7 +83,7 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -89,7 +93,7 @@ SECRET_KEY = '&npg=95xsb^(xfy_x(+m7!41zy(s9lht73k+xk#h!1a)&pq)95'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    #     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -127,6 +131,7 @@ INSTALLED_APPS = (
     'south',
     'polymorphic',
     'django.contrib.contenttypes',
+    'ddjjapp',
 )
 
 # A sample logging configuration. The only tangible logging
