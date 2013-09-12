@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 
 from polymorphic import PolymorphicModel
@@ -11,33 +13,41 @@ class PreviousJob(models.Model):
     position = models.CharField(max_length=50)
     was_state_related = models.BooleanField()
 
+
 class Income(models.Model):
     affidavit = models.ForeignKey(Affidavit)
-    ammount_year = models.DecimalField(max_digits=12, decimal_places=2)
+    ammount_year = models.DecimalField(
+        max_digits=12, decimal_places=2)
     notes = models.TextField()
+
 
 class Property(PolymorphicModel):
     percentage = models.DecimalField()
-	buy_year = models.DateField()
+    buy_year = models.DateField()
 
     bought_value = models.DecimalField()
 
-	affidavit = models.ForeignKey(Affidavit)
+    affidavit = models.ForeignKey(Affidavit)
 
-  	# REVIEW
+    # REVIEW
     money_origin = models.CharField(max_length=100)
 
-class FiscalProperty(Property):
-	"""
-		Propiedades con valor fiscal
-	"""
 
-    fiscal_value = models.DecimalField()
+class FiscalProperty(Property):
+
+    """
+        Propiedades con valor fiscal
+    """
+
+    fiscal_value = models.DecimalField()    # Only valid value.
+
 
 class PaperProperty(Property):
-	"""
-	"""
-	current_value = models.DecimalField()
+
+    """
+    """
+    current_value = models.DecimalField()
+
 
 class RealState(FiscalProperty):
     HOUSE = 'H'
@@ -45,7 +55,8 @@ class RealState(FiscalProperty):
         (HOUSE, 'Casa'),
     )
 
-    property_type = models.CharField(max_length=1, choices=PROPERTY_TYPE_CHOICES , default=HOUSE)
+    property_type = models.CharField(
+        max_length=1, choices=PROPERTY_TYPE_CHOICES, default=HOUSE)
 
     neighborhood = models.CharField(max_length=100)
     city = models.CharField(max_length=100)
@@ -54,28 +65,32 @@ class RealState(FiscalProperty):
 
     size = models.DecimalField()
 
-    unidad = models.DecimalField() # no tengo idea de lo que es esto.
+    unidad = models.DecimalField()  # no tengo idea de lo que es esto.
 
     improvements = models.DecimalField()
 
+
 class CompanyShare(PaperProperty):
 
-	society_type = models.CharField(max_length=100)
+    society_type = models.CharField(max_length=100)
 
     company_activity = models.CharField(max_length=100)
 
     state_related = models.BooleanField()
 
+
 class FinanctialProperty(PaperProperty):
-	"""
-		Acciones
-	"""
-    STOCKS  = 'S'
+
+    """
+        Acciones
+    """
+    STOCKS = 'S'
     PROPERTY_TYPE_CHOICES = (
         (STOCKS, 'Acciones'),
     )
 
-    property_type = models.CharField(max_length=1, choices=PROPERTY_TYPE_CHOICES , default=STOCKS)
+    property_type = models.CharField(
+        max_length=1, choices=PROPERTY_TYPE_CHOICES, default=STOCKS)
 
     description = models.CharField(max_length=100)
 
@@ -83,20 +98,23 @@ class FinanctialProperty(PaperProperty):
 
     quantity = models.IntegerField()
 
+
 class BankAccount(models.Model):
-	CHECKING_ACCOUNT = 'C'
-	SAVINGS_ACCOUNT = 'S'
+    CHECKING_ACCOUNT = 'C'
+    SAVINGS_ACCOUNT = 'S'
 
     ACCOUNT_TYPE_CHOICES = (
         (CHECKING_ACCOUNT, 'Cuenta Corriente'),
         (SAVINGS_ACCOUNT, 'Cuenta Corriente'),
     )
 
-    property_type = models.CharField(max_length=1, choices=PROPERTY_TYPE_CHOICES , default=STOCKS)
+    property_type = models.CharField(
+        max_length=1, choices=PROPERTY_TYPE_CHOICES, default=STOCKS)
     currency = models.CharField(max_length=3, default='ARS')
 
 
 class PersonalProperty(FiscalProperty):
+
     """
         Bienes muebles
         Tal vez todas las propiedades deberían tener un padre común.
@@ -107,22 +125,24 @@ class PersonalProperty(FiscalProperty):
         (CAR, 'Automotor'),
     )
 
-
-    property_type = models.CharField(max_length=1, choices=PROPERTY_TYPE_CHOICES , default=CAR)
+    property_type = models.CharField(
+        max_length=1, choices=PROPERTY_TYPE_CHOICES, default=CAR)
     description = models.CharField(max_length=100)
 
     fabrication_year = models.DateField()
 
+
 class Jurisdiction(models.Model):
+
     """
         Provincia, Ciudad, Nación
 
         Esto no se si tiene sentido.
-        Por ahí debería ser directamente el departamento. 
+        Por ahí debería ser directamente el departamento.
         Ministerio de Seguridad de la
 
 
-        Ejemplo: 
+        Ejemplo:
             name: La Pampa
             parent = Argentina
 
@@ -137,17 +157,18 @@ class Jurisdiction(models.Model):
 
 
 class AffidavitTemplate(models.Model):
+
     """
         El modelo de una declaración jurada.
         Por ejemplo:
             Las DDJJ de la Ciudad eran completadas a mano creo que hasta 2009.
             Las DDJJ del Poder Judicial, tienen otras características.
-            Acá debería poner de qué juridiscción, poder, etc. y la fecha o rango de
-fechas.
+            Acá debería poner de qué juridiscción, poder, etc. y la fecha
+            o rango defechas.
 
-		Entonces se debería poder buscar: del Buenos Aires, el Poder Ejecutivo, de tal a tal fecha, cuál es el template usado.
+        Entonces se debería poder buscar: del Buenos Aires, el Poder Ejecutivo,
+        de tal a tal fecha, cuál es el template usado.
     """
-
 
     LEGISLATURE = 'L'
     EXECUTIVE = 'E'
@@ -158,38 +179,42 @@ fechas.
         (JUDICIARY, 'Judicial'),
     )
 
-
-    power = models.CharField(max_length=1, choices=POWER_CHOICES, default=EXECUTIVE)
+    power = models.CharField(
+        max_length=1, choices=POWER_CHOICES, default=EXECUTIVE)
     jurisdiction = models.ForeignKey(Jurisdiction)
-    sample_document = models.FileField(upload_to='documents') # El instructivo para completar. 
+    # El instructivo para completar.
+    sample_document = models.FileField(upload_to='documents')
     init_date = models.DateField()
     finish_date = models.DateField()
 
 
-
 class Document(models.Model):
+
     """
         Un documento scaneado con una declaración jurada.
     """
-    document_file = models.FileField(upload_to='documents')	
+    document_file = models.FileField(upload_to='documents')
     upload_date = models.DateTimeField()
 
-    template = models.ForeignKey(AffidavitTemplate)	# qué formato tiene la declaración jurada.
+    # qué formato tiene la declaración jurada.
+    template = models.ForeignKey(AffidavitTemplate)
 
     notes = models.TextField()
 
 
 class OtherActivities(models.Model):
-	company = models.CharField(max_length=100)
-	activity = models.CharField(max_length=100)
-	position = models.CharField(max_length=100)
-	init_date = models.DateField()
-	finish_date = models.DateField()
-	leave = models.BooleanField() # licencia
-	hours_per_week = models.DecimalField()
-	state_related = models.BooleanField()
+    company = models.CharField(max_length=100)
+    activity = models.CharField(max_length=100)
+    position = models.CharField(max_length=100)
+    init_date = models.DateField()
+    finish_date = models.DateField()
+    leave = models.BooleanField()  # licencia
+    hours_per_week = models.DecimalField()
+    state_related = models.BooleanField()
+
 
 class Affidavit(models.Model):
+
     """
         Una declaración jurada.
     """
@@ -200,23 +225,29 @@ class Affidavit(models.Model):
 
     MARITAL_STATUS_CHOICES = (
         (MARRIED, 'Casado'),
-        (SINGLE, 'Soltero'), 
+        (SINGLE, 'Soltero'),
         (DIVORCED, 'Divorciado'),
         (WIDOWER, 'Viudo'),
     )
-    original_document = models.OneToOneField(Document) # que a su vez tiene un template de donde se saca la jurisdicción y el poder.
+    # que a su vez tiene un template de donde se saca la jurisdicción y el
+    # poder.
+    original_document = models.OneToOneField(Document)
 
     submission_date = models.DateTimeField()
 
-    # datos personales
-    person = models.ForeignKey(Person)	# Datos personales que no cambian de una declaración jurada a otra (DNI, nombre, etc.)
-    marital_status = models.CharField(max_length=1, choices=MARITAL_STATUS_CHOICES, default=MARRIED)
+    # Datos personales que no cambian de una declaración jurada a otra (DNI,
+    # nombre, etc.)
+    person = models.ForeignKey(Person)
+    marital_status = models.CharField(
+        max_length=1, choices=MARITAL_STATUS_CHOICES, default=MARRIED)
 
     # Datos del cargo.
     position_entry_date = models.DateField()
     position = models.ForeignKey(Position)
-    contract_type = models.CharField(max_length=50)	# tipo de contrato, probablemente lo debería hacer CHOICES
-    anual_net_salary = models.DecimalField(max_digits=12, decimal_places=2)
+    # tipo de contrato, probablemente lo debería hacer CHOICES
+    contract_type = models.CharField(max_length=50)
+    anual_net_salary = models.DecimalField(
+        max_digits=12, decimal_places=2)
 
     # Estudios
     # REVIEW
@@ -230,9 +261,8 @@ class Affidavit(models.Model):
     worked_before_position = models.BoolearField()
 
 
-
-
 class Person(models.Model):
+
     """
         Datos que no cambian de una persona de una a otra declaración jurada.
         Lo que puede cambiar (cargos, de estado civil, de bienes, etc. va en la declaración)
@@ -249,26 +279,29 @@ class Person(models.Model):
         (FEMALE, 'Femenino')
     )
 
-    id_type = models.CharField(max_length=1, choices=ID_TYPE_CHOICES, default=DNI)
+    id_type = models.CharField(
+        max_length=1, choices=ID_TYPE_CHOICES, default=DNI)
     id_number = models.CharField(max_length=15)
     name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     birth_date = DateField()
-    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default=MALE)
+    gender = models.CharField(
+        max_length=1, choices=GENDER_CHOICES, default=MALE)
     notes = models.TextField()
 
 
 class Office(models.Model):
-	"""
-		Ministerio, subsecretaría, etc.
-		Nota:
-			Si se elimina un ministerio o subsecretaría, no se elimina de la base de datos porque arruinaría la integridad referencial.
-			En ese caso, se lo deja, pero simplemente no tiene más declaraciones juradas. Por ahí se podría poner una fecha de creación y eliminación.
-			Si se crea uno, pasa lo mismo.
 
-			Si se cambia de padre (una subsecretaría pasa a depender de otro ministerio), no pasa nada, simplemente, se crea una nueva oficina con otro padre.
+    """
+        Ministerio, subsecretaría, etc.
+        Nota:
+            Si se elimina un ministerio o subsecretaría, no se elimina de la base de datos porque arruinaría la integridad referencial.
+            En ese caso, se lo deja, pero simplemente no tiene más declaraciones juradas. Por ahí se podría poner una fecha de creación y eliminación.
+            Si se crea uno, pasa lo mismo.
 
-	"""
+            Si se cambia de padre (una subsecretaría pasa a depender de otro ministerio), no pasa nada, simplemente, se crea una nueva oficina con otro padre.
+
+    """
     name = models.CharField(max_length=100)
     parent = models.ForeignKey(Office)
 
@@ -280,6 +313,7 @@ class Office(models.Model):
 
 
 class Position(models.Model):
+
     """
     Cargo
     """
@@ -287,4 +321,3 @@ class Position(models.Model):
     office = models.ForeignKey(Office)
 
     notes = models.TextField()
-
