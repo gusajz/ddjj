@@ -21,12 +21,14 @@ DATABASES = {
         # Empty for localhost through domain sockets or '127.0.0.1' for
         # localhost through TCP.
         'HOST': 'localhost',
-        'PORT': '5432',                      # Set to empty string for default.
+        # Set to empty string for default.
+        'PORT': '5432',
     }
 }
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
-# See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
+# See
+# https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
 
 # Local time zone for this installation. Choices can be found here:
@@ -49,7 +51,8 @@ USE_I18N = True
 # calendars according to the current locale.
 USE_L10N = True
 
-# If you set this to False, Django will not use timezone-aware datetimes.
+# If you set this to False, Django will not use timezone-aware
+# datetimes.
 USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
@@ -89,7 +92,8 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '&npg=95xsb^(xfy_x(+m7!41zy(s9lht73k+xk#h!1a)&pq)95'
 
-# List of callables that know how to import templates from various sources.
+# List of callables that know how to import templates from various
+# sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
@@ -106,10 +110,11 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'ddjj.urls'
+ROOT_URLCONF = 'ddjjsite.urls'
 
-# Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'ddjj.wsgi.application'
+# Python dotted path to the WSGI application used by Django's
+# runserver.
+WSGI_APPLICATION = 'ddjjsite.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
