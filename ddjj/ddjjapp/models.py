@@ -253,7 +253,8 @@ class Jurisdiction(models.Model):
             parent: None
     """
     name = models.CharField(max_length=50)
-    parent = models.ForeignKey('Jurisdiction')
+    parent = models.ForeignKey(
+        'Jurisdiction', null=True, blank=True, default=None)
 
 
 class OtherActivities(models.Model):
