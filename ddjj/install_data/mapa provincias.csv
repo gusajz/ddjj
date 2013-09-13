@@ -1,0 +1,29 @@
+COD,ISO 3166-2,Provincia,Direccion,Icon
+1,AR-C,CABA,"CABA, Argentina",small_red
+2,AR-B,Buenos Aires,"Buenos Aires, Argentina",small_yellow
+3,AR-K,Catamarca,"Catamarca, Argentina",small_green
+4,AR-H,Chaco,"Chaco, Argentina",small_blue
+5,AR-U,Chubut,"Chubut, Argentina","small_green
+"
+6,AR-X,Córdoba,"Córdoba, Argentina",measle_brown
+7,AR-W,Corrientes,"Corrientes, Argentina",measle_green
+8,AR-E,Entre Ríos,"Entre Ríos, Argentina",measle_white
+9,AR-P,Formosa,"Formosa, Argentina",measle_turquoise
+10,AR-Y,Jujuy,"Jujuy, Argentina",small_red
+11,AR-L,La Pampa,"La Pampa, Argentina",small_purple
+12,AR-F,La Rioja,"La Rioja, Argentina","small_purple
+"
+13,AR-M,Mendoza,"Mendoza, Argentina",small_blue
+14,AR-N,Misiones,"Misiones, Argentina",small_purple
+15,AR-Q,Neuquén,"Neuquén, Argentina",measle_brown
+16,AR-R,Río Negro,"Río Negro, Argentina",measle_grey
+17,AR-A,Salta,"Salta, Argentina",measle_white
+18,AR-J,San Juan,"San Juan, Argentina",measle_turquoise
+19,AR-D,San Luis,"San Luis, Argentina",small_red
+20,AR-Z,Santa Cruz,"Santa Cruz, Argentina",small_yellow
+21,AR-S,Santa Fe,"Santa Fe, Argentina","measle_grey
+"
+22,AR-G,Santiago del Estero,"Santiago del Estero, Argentina","small_yellow
+"
+23,AR-V,Tierra del Fuego,"Tierra del Fuego, Argentina",small_purple
+24,AR-T,Tucumán,"Tucumán, Argentina",measle_brown

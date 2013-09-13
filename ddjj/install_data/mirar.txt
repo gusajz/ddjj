@@ -1,0 +1,3 @@
+https://github.com/alex/django-taggit
+https://django-uni-form.readthedocs.org/en/latest/
+http://pinaxproject.com/
