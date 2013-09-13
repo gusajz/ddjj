@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'south',
     'polymorphic',
     'django.contrib.contenttypes',
+    'django_extensions',
     'ddjjapp',
 )
 
