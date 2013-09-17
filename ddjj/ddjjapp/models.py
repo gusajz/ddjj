@@ -256,6 +256,9 @@ class Jurisdiction(models.Model):
     parent = models.ForeignKey(
         'Jurisdiction', null=True, blank=True, default=None)
 
+    def __unicode__(self):
+        return unicode(self.name)
+
 
 class OtherActivities(models.Model):
     company = models.CharField(max_length=100)
