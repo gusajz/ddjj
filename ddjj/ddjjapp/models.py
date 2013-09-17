@@ -2,8 +2,6 @@
 
 from django.db import models
 
-from polymorphic import PolymorphicModel
-
 
 class PreviousJob(models.Model):
     begin_date = models.DateField()
@@ -115,7 +113,7 @@ class Income(models.Model):
     notes = models.TextField()
 
 
-class Property(PolymorphicModel):
+class Property(models.Model):
     percentage = models.DecimalField(max_digits=3, decimal_places=2)
     buy_year = models.DateField()
 
@@ -126,6 +124,9 @@ class Property(PolymorphicModel):
 
     # REVIEW
     money_origin = models.CharField(max_length=100)
+
+    class Meta:
+        abstract = True
 
 
 class FiscalProperty(Property):

@@ -6,6 +6,7 @@ local_settings.py
 
 datos
 datos/
+install_data/mirar.txt
 *.swp
 venv
 commands.txt
