@@ -112,6 +112,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'ddjjsite.urls'
@@ -143,6 +144,8 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django_extensions',
     'ddjjapp',
+
+    'debug_toolbar',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -151,21 +154,26 @@ INSTALLED_APPS = (
 # See http://docs.djangoproject.com/en/dev/topics/logging for
 # more details on how to customize your logging configuration.
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'filters': {
+    'version':
+    1,
+    'disable_existing_loggers':
+    False,
+    'filters':
+    {
         'require_debug_false': {
             '()': 'django.utils.log.RequireDebugFalse'
         }
     },
-    'handlers': {
+    'handlers':
+    {
         'mail_admins': {
             'level': 'ERROR',
             'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         }
     },
-    'loggers': {
+    'loggers':
+    {
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
@@ -173,3 +181,7 @@ LOGGING = {
         },
     }
 }
+
+
+# Just for debugging delete on production
+INTERNAL_IPS = ('127.0.0.1',)
