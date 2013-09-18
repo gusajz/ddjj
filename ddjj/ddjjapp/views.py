@@ -4,7 +4,7 @@ from django.views.generic import CreateView, UpdateView, DetailView, ListView
 
 #from braces.views import LoginRequiredMixin
 
-from .models import Person
+from .models import Person, Document
 
 
 class PersonCreateView(CreateView):
@@ -27,3 +27,7 @@ class PersonResultsView(PersonDetailView):
 class PersonListView(ListView):
     model = Person
     template_name = "person/list.jade"
+
+
+class DocumentDetailView(DetailView):
+    model = Document

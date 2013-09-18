@@ -1,12 +1,16 @@
-!!! 5
-html(lang="en")
+extend base
 
-  head
+block title
     title Personas
 
-  body
+block content
     h1.title Personas
 
-    each person in person_list
-        p= person.name
-
+    table.table.table-stripped
+        thead
+            tr
+                th Nombre
+        tbody
+            tr
+                each person in person_list
+                    td= person.name

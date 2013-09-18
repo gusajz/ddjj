@@ -2,6 +2,8 @@
 
 from django.db import models
 
+from model_utils.models import TimeStampedModel
+
 
 class PreviousJob(models.Model):
     begin_date = models.DateField()
@@ -44,18 +46,22 @@ class AffidavitTemplate(models.Model):
     finish_date = models.DateField()
 
 
-class Document(models.Model):
+class Document(TimeStampedModel):
 
     """
         Un documento scaneado con una declaración jurada.
+
+        Tal vez debería usar esto. 
+        from model_utils.models import StatusModel
+        from model_utils import Choices
     """
     document_file = models.FileField(upload_to='documents')
-    upload_date = models.DateTimeField()
 
     # qué formato tiene la declaración jurada.
-    template = models.ForeignKey('AffidavitTemplate')
+    template = models.ForeignKey(
+        'AffidavitTemplate', null=True, blank=True, default=None)
 
-    notes = models.TextField()
+    notes = models.TextField(null=True, blank=True, default=None)
 
 
 class Affidavit(models.Model):
