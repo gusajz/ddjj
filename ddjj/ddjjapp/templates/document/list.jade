@@ -1,0 +1,49 @@
+extend base
+
+block title
+    title Documentos
+
+block content
+    h1.title Documentos
+
+    .navbar.navbar-inverse
+        .container
+            .navbar-header
+                a.navbar-brand DDJJ
+        
+            form.navbar-form.navbar-right
+                .form-group
+                input(type="text", name="q", placeholder="Search").form-control
+                button(type="submit").btn.btn-default Buscar
+
+
+
+
+    .container
+        table.table.table-stripped
+            thead
+                tr
+                    th Url
+                    th Plantilla
+                    th Notas
+            tbody
+                tr
+                    each obj in object_list
+                        td
+                            a(href!= '{% url "document-detail" obj.id %}')= obj.document_file
+                        td= obj.template
+                        td= obj.notes
+
+        if is_paginated
+            ul.pager
+                span.step-links
+                    if page_obj.has_previous
+                        a(href="?page={{ page_obj.previous_page_number }}") previous
+                span.current Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+
+                if page_obj.has_next
+                    a(href="?page={{ page_obj.next_page_number }}") next
+
+
+
+

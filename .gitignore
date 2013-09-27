@@ -3,7 +3,8 @@
 *.pyc
 local_settings.py
 
-
+files
+files/
 datos
 datos/
 install_data/mirar.txt
