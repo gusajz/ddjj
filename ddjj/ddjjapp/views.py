@@ -31,3 +31,9 @@ class PersonListView(ListView):
 
 class DocumentDetailView(DetailView):
     model = Document
+    template_name = "document/detail.jade"
+
+
+class DocumentListView(ListView):
+    model = Document
+    template_name = "document/list.jade"

@@ -41,7 +41,7 @@ class AffidavitTemplate(models.Model):
         max_length=1, choices=POWER_CHOICES, default=EXECUTIVE)
     jurisdiction = models.ForeignKey('Jurisdiction')
     # El instructivo para completar.
-    sample_document = models.FileField(upload_to='documents')
+    sample_document = models.FileField(upload_to='templates')
     init_date = models.DateField()
     finish_date = models.DateField()
 
