@@ -1,0 +1,12 @@
+extend base
+
+{% load crispy_forms_tags %}
+
+block title
+    title Documento
+
+block content
+    h1.title Documento
+
+    .container
+        {% crispy form %}

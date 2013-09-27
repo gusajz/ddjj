@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 
 from .views import PersonCreateView, PersonUpdateView, PersonDetailView, PersonResultsView, PersonListView
-from .views import DocumentDetailView, DocumentListView
+from .views import DocumentDetailView, DocumentListView, DocumentUpdateView, AffidavitScrapView
 
 
 urlpatterns = patterns("",
@@ -21,6 +21,7 @@ urlpatterns = patterns("",
                        name="results"
                        ),
 
+                       # Documents
                        url(
                        regex=r"^document$",
                        view=DocumentListView.as_view(),
@@ -29,8 +30,15 @@ urlpatterns = patterns("",
 
                        url(
                        regex=r"^document/(?P<pk>\d+)/$",
-                       view=DocumentDetailView.as_view(),
-                       name="document-detail"
+                       view=DocumentUpdateView.as_view(),
+                       name="document-update"
+                       ),
+# Affidavit
+
+                       url(
+                       regex=r"^affidavit/(?P<pk>\d+)/$",
+                       view=AffidavitScrapView.as_view(),
+                       name="affidavit-scrap"
                        ),
 
                        )

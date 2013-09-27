@@ -147,10 +147,13 @@ INSTALLED_APPS = (
     'model_utils',
     'django.contrib.contenttypes',
     'django_extensions',
+    'crispy_forms',
+
     'ddjjapp',
 
     'debug_toolbar',
 )
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -187,5 +190,8 @@ LOGGING = {
 }
 
 
+# PACKAGES:
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 # Just for debugging delete on production
-INTERNAL_IPS = ('127.0.0.1',)
+if DEBUG:
+    INTERNAL_IPS = ('127.0.0.1',)

@@ -1,0 +1,12 @@
+extend base
+
+{% load crispy_forms_tags %}
+
+block title
+    title Declaración Jurada
+
+block content
+    h1.title Declaración Jurada
+
+    .container
+        {% crispy form %}

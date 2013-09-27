@@ -26,7 +26,6 @@ block content
                     th Url
                     th Plantilla
                     th Notas
-                    th
             tbody
                 tr
                     each obj in object_list
@@ -34,10 +33,6 @@ block content
                             a(href!= '{% url "document-update" obj.id %}')= obj.document_file
                         td= obj.template
                         td= obj.notes
-                        td
-                            form.form-inline
-                                button(type="submit").btn.btn-default.btn-xs Completar
-
 
         if is_paginated
             ul.pager
@@ -48,6 +43,7 @@ block content
 
                 if page_obj.has_next
                     a(href="?page={{ page_obj.next_page_number }}") next
+
 
 
 

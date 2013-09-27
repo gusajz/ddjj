@@ -63,6 +63,9 @@ class Document(TimeStampedModel):
 
     notes = models.TextField(null=True, blank=True, default=None)
 
+    def __unicode__(self):
+        return unicode(self.document_file)
+
 
 class Affidavit(models.Model):
 
@@ -82,7 +85,7 @@ class Affidavit(models.Model):
     )
     # que a su vez tiene un template de donde se saca la jurisdicción y el
     # poder.
-    original_document = models.OneToOneField(Document)
+    original_document = models.OneToOneField(Document, primary_key=True)
 
     submission_date = models.DateTimeField()
 
@@ -306,6 +309,9 @@ class Person(models.Model):
     gender = models.CharField(
         max_length=1, choices=GENDER_CHOICES, default=MALE)
     notes = models.TextField()
+
+    def __unicode__(self):
+        return unicode(self.name + " " + self.last_name)
 
 
 class Office(models.Model):
