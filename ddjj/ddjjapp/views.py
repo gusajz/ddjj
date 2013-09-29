@@ -1,6 +1,12 @@
+# -*- coding: utf-8 -*-
 # Create your views here.
 
 from django.views.generic import CreateView, UpdateView, DetailView, ListView, FormView
+from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404
+
+from django.core.urlresolvers import reverse
+
 
 #from braces.views import LoginRequiredMixin
 
@@ -31,16 +37,26 @@ class PersonListView(ListView):
     template_name = "person/list.jade"
 
 
-class DocumentUpdateView(UpdateView):
+class DocumentEditMixin(object):
+    template_name = "document/form.jade"
+    #form_class = DocumentForm
     model = Document
-    template_name = "document/update.jade"
-    form_class = DocumentForm
+
+    def get_success_url(self):
+        return reverse('document-detail', kwargs={'pk': self.object.pk})
 
 
-class DocumentDetailView(DetailView):
-    model = Document
+class DocumentCreateView(DocumentEditMixin, CreateView):
+    pass
+
+
+class DocumentUpdateView(DocumentEditMixin, UpdateView):
+    pass
+
+
+class DocumentDetailView(DocumentEditMixin, DetailView):
     template_name = "document/detail.jade"
-    form_class = DocumentForm
+    model = Document
 
 
 class DocumentListView(ListView):
@@ -54,7 +70,40 @@ class AffidavitUpdateView(UpdateView):
     form_class = AffidavitForm
 
 
-class AffidavitScrapView(FormView):
+class AffidavitScrapView(UpdateView):
     model = Affidavit
     template_name = "affidavit/scrap.jade"
-    form_class = AffidavitForm
+    #form_class = AffidavitForm
+
+    def get_object(self, queryset=None):
+            # Miro si existe un
+            #import ipdb
+            # ipdb.set_trace()
+
+#        from django.db import connection
+#        connection._rollback()
+        if queryset is None:
+            queryset = self.get_queryset()
+
+        pk = self.kwargs.get(self.pk_url_kwarg, None)
+
+        try:
+       #     with transaction.commit_on_success():
+            from django.db import connection
+            # connection._rollback()
+            import logging
+
+            logging.debug('Query: %s' % type(queryset))
+            obj = queryset.create()  # (original_document_id=pk)
+        except ObjectDoesNotExist:
+            raise Http404("No %(verbose_name)s found matching the query" %
+                          {'verbose_name': queryset.model._meta.verbose_name})
+        return obj
+
+
+
+#     def get_object(self, queryset=None):
+#         import ipdb
+#         ipdb.set_trace()
+#         return super(CreateView)
+# Si no existe, debería crearlo (con el id)

@@ -1,12 +1,11 @@
 from django import forms
+
 from .models import Document, Affidavit
 
 
 class DocumentForm(forms.ModelForm):
-
-    class Meta:
-        model = Document
-        fields = ['notes']
+    # el archivo debería ser read only si es update.
+    pass
 
 
 class AffidavitForm(forms.ModelForm):

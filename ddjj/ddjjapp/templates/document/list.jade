@@ -28,15 +28,15 @@ block content
                     th Notas
                     th
             tbody
-                tr
-                    each obj in object_list
-                        td
-                            a(href!= '{% url "document-update" obj.id %}')= obj.document_file
-                        td= obj.template
-                        td= obj.notes
-                        td
-                            form.form-inline
-                                button(type="submit").btn.btn-default.btn-xs Completar
+                each obj in object_list
+                    tr
+                    td
+                        a(href!= '{% url "document-update" obj.id %}')= obj.document_file
+                    td= obj.template
+                    td= obj.notes
+                    td
+                        form.form-inline
+                            button(type="submit", action='{% url "document-update" obj.id %}').btn.btn-default.btn-xs Completar
 
 
         if is_paginated

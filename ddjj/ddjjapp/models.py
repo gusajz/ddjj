@@ -4,6 +4,8 @@ from django.db import models
 
 from model_utils.models import TimeStampedModel
 
+from immutablefield.models import ImmutableModel
+
 
 class PreviousJob(models.Model):
     begin_date = models.DateField()
@@ -46,7 +48,7 @@ class AffidavitTemplate(models.Model):
     finish_date = models.DateField()
 
 
-class Document(TimeStampedModel):
+class Document(ImmutableModel, TimeStampedModel):
 
     """
         Un documento scaneado con una declaración jurada.
@@ -62,6 +64,11 @@ class Document(TimeStampedModel):
         'AffidavitTemplate', null=True, blank=True, default=None)
 
     notes = models.TextField(null=True, blank=True, default=None)
+
+    class ImmutableMeta:
+        # After ya name a ship, you can't change it matey
+        immutable = ['document_file']
+        quiet = False
 
     def __unicode__(self):
         return unicode(self.document_file)

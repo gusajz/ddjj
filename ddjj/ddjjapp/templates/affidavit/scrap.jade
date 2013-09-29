@@ -1,6 +1,6 @@
 extend base
 
-{% load crispy_forms_tags %}
+//{% load crispy_forms_tags %}
 
 block title
     title Declaración Jurada
@@ -9,4 +9,8 @@ block content
     h1.title Declaración Jurada
 
     .container
-        {% crispy form %}
+        form(action='.', method='post')
+            {{ form }}
+            {% csrf_token %}
+            input(type='submit') Guardar
+//          {% crispy form %}

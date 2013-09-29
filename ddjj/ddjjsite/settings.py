@@ -147,7 +147,6 @@ INSTALLED_APPS = (
     'model_utils',
     'django.contrib.contenttypes',
     'django_extensions',
-    'crispy_forms',
 
     'ddjjapp',
 
