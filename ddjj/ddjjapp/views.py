@@ -76,25 +76,13 @@ class AffidavitScrapView(UpdateView):
     #form_class = AffidavitForm
 
     def get_object(self, queryset=None):
-            # Miro si existe un
-            #import ipdb
-            # ipdb.set_trace()
-
-#        from django.db import connection
-#        connection._rollback()
         if queryset is None:
             queryset = self.get_queryset()
 
         pk = self.kwargs.get(self.pk_url_kwarg, None)
 
         try:
-       #     with transaction.commit_on_success():
-            from django.db import connection
-            # connection._rollback()
-            import logging
-
-            logging.debug('Query: %s' % type(queryset))
-            obj = queryset.create()  # (original_document_id=pk)
+            obj = queryset.get_or_create(original_document_id=pk)
         except ObjectDoesNotExist:
             raise Http404("No %(verbose_name)s found matching the query" %
                           {'verbose_name': queryset.model._meta.verbose_name})

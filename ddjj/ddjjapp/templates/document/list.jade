@@ -35,9 +35,7 @@ block content
                     td= obj.template
                     td= obj.notes
                     td
-                        form.form-inline
-                            button(type="submit", action='{% url "document-update" obj.id %}').btn.btn-default.btn-xs Completar
-
+                        a(href='{% url "affidavit-scrap" obj.id %}').btn.btn-primary Completar
 
         if is_paginated
             ul.pager
